@@ -13,6 +13,12 @@ window.SLONTEC_CONFIG = {
   // Datos de contacto mostrados en la página
   telefono: "+34 961 47 58 83",
   telefonoVisible: "961 47 58 83",
+  // WhatsApp del pie de página — ⚠️ PROVISIONAL (número falso), sustituir por el real.
+  // Formato: prefijo de país + número, sin espacios ni "+" (ej.: 34612345678)
+  whatsapp: "34600000000",
+  whatsappVisible: "600 00 00 00",
+  whatsappMensaje: "Hola Slontec, os escribo desde vuestra web.",
+
   email: "info@slontec.com", // ← CONFIRMAR: email donde los clientes piden la baja
   direccionTaller: "Pl. Alquería de la Culla, 4, 46910 Alfafar (Valencia)",
   horario: "Lunes a viernes, 8:00 – 18:00",

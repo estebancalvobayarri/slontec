@@ -6,7 +6,10 @@
   <title>Slontec · Valora nuestro servicio</title>
   <meta name="description" content="SLONTEC Instalación, Mantenimiento y Reparación. Electricidad, fontanería, climatización y reformas en Valencia. Cuéntanos qué tal ha ido tu servicio.">
   <meta name="theme-color" content="#0f3b5f">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2a516'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='800' font-size='38' text-anchor='middle' fill='%233b2a00'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f3b5f'/%3E%3Cg transform='translate(50 52) scale(.72) translate(-50 -50)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 48 L50 17 L86 48 M24 41 V84 H76 V41' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M35 62 L46 73 L66 51' stroke='%23f2a516' stroke-width='11'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
   <script src="config.js"></script>
 </head>
@@ -14,16 +17,18 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="./">
-      <span class="logo-mark">S</span>
-      <span class="logo-text">SLONTEC<small>Instalación · Mantenimiento · Reparación</small></span>
+    <a class="logo" href="./" aria-label="Slontec, inicio">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 41 V84 H76 V41" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="logo-text">Slontec<small>Instalación · Mantenimiento · Reparación</small></span>
     </a>
-    <a class="top-call" id="topCall" href="tel:+34961475883">📞 961 47 58 83</a>
+    <a class="top-call" id="topCall" href="tel:+34961475883" aria-label="Llamar a Slontec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="js-tel">961 47 58 83</span></a>
   </div>
 </header>
 
 <section class="hero">
+  <svg class="hero-house" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48 M24 41 V84 H76 V41" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   <div class="wrap">
+    <div class="eyebrow"><span></span>Tu opinión cuenta<span></span></div>
     <h1>Gracias por confiar en nosotros</h1>
     <p>Tu opinión nos ayuda a mejorar cada día y a que otros vecinos nos conozcan. Solo te llevará un minuto.</p>
   </div>
@@ -96,7 +101,7 @@
     </form>
 
     <div class="done" id="done" aria-live="polite">
-      <div class="big">🙌</div>
+      <svg class="done-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48 M24 41 V84 H76 V41" fill="none" stroke="#0f3b5f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path class="done-check" d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <h2>¡Muchas gracias!</h2>
       <p class="lead" id="doneLead">Ya casi está. Termina en la ventana de Google que se ha abierto:</p>
       <ol id="doneSteps">
@@ -111,37 +116,37 @@
     </div>
   </div>
 
-  <section class="section">
-    <h2>Qué hacemos</h2>
-    <div class="services">
-      <div class="service"><div class="ico">⚡</div><h3>Electricidad</h3><p>Instalaciones, averías, cuadros eléctricos e iluminación.</p></div>
-      <div class="service"><div class="ico">🚿</div><h3>Fontanería</h3><p>Fugas, desatascos, grifería, sanitarios y calentadores.</p></div>
-      <div class="service"><div class="ico">❄️</div><h3>Climatización</h3><p>Instalación y mantenimiento de aire acondicionado y calefacción.</p></div>
-      <div class="service"><div class="ico">🧱</div><h3>Reformas</h3><p>Baños, cocinas, albañilería y acabados.</p></div>
-      <div class="service"><div class="ico">🛠️</div><h3>Mantenimiento</h3><p>Revisiones periódicas para viviendas, comunidades y locales.</p></div>
-      <div class="service"><div class="ico">🏠</div><h3>Reparaciones</h3><p>Reparaciones del hogar y asistencia en siniestros de seguros.</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>Contacto</h2>
-    <div class="contact">
-      <div><strong>Teléfono</strong><a class="js-tel-link" href="tel:+34961475883">961 47 58 83</a></div>
-      <div><strong>Horario</strong><span class="js-horario">Lunes a viernes, 8:00 – 18:00</span></div>
-      <div><strong>Dirección</strong><span class="js-dir">Pl. Alquería de la Culla, 4, 46910 Alfafar (Valencia)</span></div>
-    </div>
-  </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    © <span id="year">2026</span> Slontec Instalaciones y Mantenimientos S.L. · CIF B09978149
-    <div class="links">
-      <a href="privacidad.html">Política de privacidad</a>
-      <a href="baja.html">Darme de baja / borrar mis datos</a>
+<footer class="foot">
+  <div class="wrap foot-main">
+    <div class="foot-brand">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 41 V84 H76 V41" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <div class="foot-name">Slontec</div>
+        <div class="foot-tag">Instalación · Mantenimiento · Reparación</div>
+      </div>
+    </div>
+    <div class="foot-contact">
+      <a class="pill" id="footTel" href="tel:+34961475883"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><small>Llámanos</small><span class="js-tel">961 47 58 83</span></span></a>
+      <a class="pill wa" id="footWa" href="https://wa.me/34600000000" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 10h6M9 13.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><small>Escríbenos por WhatsApp</small><span class="js-wa">600 00 00 00</span></span></a>
     </div>
   </div>
+  <div class="wrap foot-legal">
+    <span>© <span class="js-year">2026</span> Slontec Instalaciones y Mantenimientos S.L. · CIF B09978149</span>
+    <span class="links"><a href="privacidad.html">Política de privacidad</a><a href="baja.html">Darme de baja / borrar mis datos</a></span>
+  </div>
 </footer>
+<script>
+(function () {
+  var C = window.SLONTEC_CONFIG || {};
+  document.querySelectorAll(".js-year").forEach(function (el) { el.textContent = new Date().getFullYear(); });
+  if (C.telefono) document.getElementById("footTel").href = "tel:" + C.telefono.replace(/\s/g, "");
+  if (C.telefonoVisible) document.querySelectorAll(".js-tel").forEach(function (el) { el.textContent = C.telefonoVisible; });
+  if (C.whatsapp) document.getElementById("footWa").href = "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(C.whatsappMensaje || "");
+  if (C.whatsappVisible) document.querySelectorAll(".js-wa").forEach(function (el) { el.textContent = C.whatsappVisible; });
+})();
+</script>
 
 <script>
 (function () {
@@ -150,18 +155,9 @@
   var CONSENT_VERSION = "2026-10-v1";
   var params = new URLSearchParams(location.search);
 
-  // ---- Rellenar datos de contacto desde config ----
-  document.getElementById("year").textContent = new Date().getFullYear();
-  if (C.telefono) {
-    document.querySelectorAll(".js-tel-link, #topCall").forEach(function (a) { a.href = "tel:" + C.telefono.replace(/\s/g, ""); });
-  }
-  if (C.telefonoVisible) {
-    document.querySelectorAll(".js-tel, .js-tel-link").forEach(function (el) { el.textContent = C.telefonoVisible; });
-    document.getElementById("topCall").textContent = "📞 " + C.telefonoVisible;
-  }
+  // ---- Datos de contacto desde config ----
+  if (C.telefono) document.getElementById("topCall").href = "tel:" + C.telefono.replace(/\s/g, "");
   if (C.email) document.querySelectorAll(".js-email").forEach(function (el) { el.textContent = C.email; });
-  if (C.horario) document.querySelectorAll(".js-horario").forEach(function (el) { el.textContent = C.horario; });
-  if (C.direccionTaller) document.querySelectorAll(".js-dir").forEach(function (el) { el.textContent = C.direccionTaller; });
 
   // ---- Estrellas ----
   var captions = { 1: "Malo", 2: "Mejorable", 3: "Correcto", 4: "Muy bien", 5: "¡Excelente!" };

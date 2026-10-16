@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Slontec · Tarjeta QR para técnicos</title>
   <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230f3b5f'/%3E%3Cg transform='translate(50 52) scale(.72) translate(-50 -50)' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 48 L50 17 L86 48 M24 41 V84 H76 V41' stroke='%23fff' stroke-width='10'/%3E%3Cpath d='M35 62 L46 73 L66 51' stroke='%23f2a516' stroke-width='11'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     .tools { padding: 20px 0; }
@@ -16,7 +21,8 @@
       background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; text-align: center;
       break-inside: avoid;
     }
-    .tarjeta .marca { font-weight: 800; letter-spacing: .08em; color: var(--brand); }
+    .tarjeta .marca { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--brand); }
+    .tarjeta .marca svg { width: 28px; height: 28px; }
     .tarjeta h3 { margin: 4px 0 2px; font-size: 18px; }
     .tarjeta p { margin: 0 0 10px; font-size: 13px; color: var(--ink-soft); }
     .tarjeta .qr { display: inline-block; padding: 8px; background: #fff; }
@@ -32,9 +38,9 @@
 <body>
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="./">
-      <span class="logo-mark">S</span>
-      <span class="logo-text">SLONTEC<small>Tarjeta QR para los técnicos</small></span>
+    <a class="logo" href="./" aria-label="Slontec, inicio">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 41 V84 H76 V41" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="logo-text">Slontec<small>Tarjeta QR para los técnicos</small></span>
     </a>
   </div>
 </header>
@@ -56,7 +62,35 @@
   <div class="sheet" id="sheet"></div>
 </main>
 
-<footer><div class="wrap">Slontec</div></footer>
+<footer class="foot">
+  <div class="wrap foot-main">
+    <div class="foot-brand">
+      <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 41 V84 H76 V41" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <div class="foot-name">Slontec</div>
+        <div class="foot-tag">Instalación · Mantenimiento · Reparación</div>
+      </div>
+    </div>
+    <div class="foot-contact">
+      <a class="pill" id="footTel" href="tel:+34961475883"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><small>Llámanos</small><span class="js-tel">961 47 58 83</span></span></a>
+      <a class="pill wa" id="footWa" href="https://wa.me/34600000000" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 10h6M9 13.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><small>Escríbenos por WhatsApp</small><span class="js-wa">600 00 00 00</span></span></a>
+    </div>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span class="js-year">2026</span> Slontec Instalaciones y Mantenimientos S.L. · CIF B09978149</span>
+    <span class="links"><a href="privacidad.html">Política de privacidad</a><a href="baja.html">Darme de baja / borrar mis datos</a></span>
+  </div>
+</footer>
+<script>
+(function () {
+  var C = window.SLONTEC_CONFIG || {};
+  document.querySelectorAll(".js-year").forEach(function (el) { el.textContent = new Date().getFullYear(); });
+  if (C.telefono) document.getElementById("footTel").href = "tel:" + C.telefono.replace(/\s/g, "");
+  if (C.telefonoVisible) document.querySelectorAll(".js-tel").forEach(function (el) { el.textContent = C.telefonoVisible; });
+  if (C.whatsapp) document.getElementById("footWa").href = "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(C.whatsappMensaje || "");
+  if (C.whatsappVisible) document.querySelectorAll(".js-wa").forEach(function (el) { el.textContent = C.whatsappVisible; });
+})();
+</script>
 
 <script>
   var base = new URL("./", location.href).href;
@@ -69,7 +103,7 @@
     for (var i = 0; i < 4; i++) {
       var t = document.createElement("div");
       t.className = "tarjeta";
-      t.innerHTML = '<div class="marca">SLONTEC</div><h3>¿Qué tal ha ido?</h3>' +
+      t.innerHTML = '<div class="marca"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48 M24 41 V84 H76 V41" fill="none" stroke="#0f3b5f" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>Slontec</div><h3>¿Qué tal ha ido?</h3>' +
         '<p>Escanea y valóranos en Google. ¡Gracias!</p><div class="qr"></div>' +
         '<div class="stars-txt">★★★★★</div><div class="tel">961 47 58 83</div>';
       sheet.appendChild(t);

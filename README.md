@@ -55,6 +55,7 @@ La hoja crea sola tres pestañas:
 
 ## Pendiente de confirmar
 
+- [ ] **WhatsApp del pie de página** en `config.js` (ahora es un número falso: 600 00 00 00).
 - [ ] **Email de contacto/bajas** en `config.js` (ahora pone `info@slontec.com`, sin verificar).
 - [ ] Revisar la lista de servicios de `index.html`.
 - [ ] Revisar `privacidad.html` (responsable: Slontec Instalaciones y Mantenimientos S.L., CIF B09978149, domicilio social Av. Francia 18, 46023 Valencia, según el registro mercantil). Es una base razonable, pero conviene que la valide vuestra gestoría o asesor de protección de datos.
