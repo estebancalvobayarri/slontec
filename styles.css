@@ -204,11 +204,15 @@ fieldset { border: 0; padding: 0; margin: 0; }
   font-weight: 700; font-size: 16px; line-height: 1.2;
 }
 .pill:hover { background: rgba(255,255,255,.12); }
-.pill svg { width: 24px; height: 24px; color: var(--accent); flex: 0 0 auto; }
+.pill svg { width: 28px; height: 28px; padding: 2px; color: var(--accent); flex: 0 0 auto; }
 .pill small { display: block; font-weight: 500; font-size: 12px; opacity: .75; }
 .pill.wa { border-color: rgba(37, 211, 102, .55); }
 .pill .wa-ico { width: 28px; height: 28px; }
-@media (max-width: 520px) { .foot-contact, .pill { width: 100%; } }
+/* Móvil: botones a la izquierda, ajustados al contenido y con el ancho del mayor */
+@media (max-width: 520px) {
+  .foot-contact { display: grid; grid-template-columns: max-content; gap: 10px; }
+  .pill { width: 100%; }
+}
 .foot-legal {
   display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 18px;
   border-top: 1px solid rgba(255,255,255,.12);
