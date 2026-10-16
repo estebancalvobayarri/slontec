@@ -45,7 +45,7 @@
         <h3>¿Quieres que te tengamos en cuenta?</h3>
         <p class="hint">Opcional. Si nos dejas tus datos, los usaremos para gestionar tus servicios y, solo si lo marcas, para avisarte de novedades o promociones.</p>
 
-        <p class="one-of"><span>Nos basta con <strong>uno de los dos</strong>: teléfono <strong>o</strong> email.</span></p>
+        <p class="one-of"><span>Solo necesitamos <strong>un dato de contacto</strong>: tu teléfono o tu email, el que prefieras.</span></p>
         <div class="row">
           <div class="field">
             <label for="phone">Teléfono</label>
@@ -55,12 +55,6 @@
             <label for="email">Email</label>
             <input type="email" id="email" autocomplete="email" inputmode="email" placeholder="tu@email.com">
           </div>
-        </div>
-
-        <div class="field">
-          <label for="comment">Tu comentario para Google <span class="opt">(opcional)</span></label>
-          <textarea id="comment" maxlength="4000" placeholder="¿Qué te ha parecido el trabajo, la puntualidad, el trato…?"></textarea>
-          <p class="legal-mini">Lo copiaremos por ti: en Google solo tendrás que pegarlo.</p>
         </div>
 
         <label class="check">
@@ -83,7 +77,7 @@
       <div class="msg err" id="formError" role="alert"></div>
 
       <button type="submit" class="btn" id="submitBtn">Publicar reseña en Google</button>
-      <p class="legal-mini" style="text-align:center">Se abrirá la ficha de Slontec en Google para que marques tus estrellas y pegues tu comentario.</p>
+      <p class="legal-mini" style="text-align:center">Se abrirá la ficha de Slontec en Google para que dejes tus estrellas y tu comentario.</p>
     </form>
 
     <div class="done" id="done" aria-live="polite">
@@ -92,12 +86,10 @@
       <p class="lead">Ya casi está. Termina en la ventana de Google que se ha abierto:</p>
       <ol>
         <li>Marca las <strong>estrellas</strong>.</li>
-        <li id="pasteStep">Mantén pulsado el cuadro de texto y elige <strong>Pegar</strong> (tu comentario ya está copiado).</li>
+        <li>Escribe un breve <strong>comentario</strong> (opcional).</li>
         <li>Pulsa <strong>Publicar</strong>.</li>
       </ol>
-      <div class="copied-box" id="copiedBox" hidden></div>
       <button type="button" class="btn secondary" id="reopenBtn">Abrir Google otra vez</button>
-      <button type="button" class="btn ghost" id="copyAgainBtn">Copiar mi comentario de nuevo</button>
       <div class="msg ok" id="savedMsg">Tus datos y preferencias se han guardado correctamente.</div>
     </div>
   </div>
@@ -151,27 +143,6 @@
   function hideError() { errBox.classList.remove("show"); }
   form.addEventListener("input", hideError);
 
-  // ---- Copiar al portapapeles (con alternativa para navegadores antiguos) ----
-  function copyText(text) {
-    if (!text) return Promise.resolve(false);
-    if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return fallbackCopy(text); });
-    }
-    return Promise.resolve(fallbackCopy(text));
-  }
-  function fallbackCopy(text) {
-    try {
-      var ta = document.createElement("textarea");
-      ta.value = text; ta.setAttribute("readonly", "");
-      ta.style.position = "fixed"; ta.style.opacity = "0";
-      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
-      var ok = document.execCommand("copy");
-      document.body.removeChild(ta);
-      return ok;
-    } catch (e) { return false; }
-  }
-  var lastComment = "";
-
   function openGoogle() {
     var w = window.open(REVIEW_URL, "_blank");
     if (w) { try { w.opener = null; } catch (e) {} }
@@ -186,7 +157,6 @@
     var email = document.getElementById("email").value.trim();
     var cInternal = document.getElementById("consentInternal").checked;
     var cPromo = document.getElementById("consentPromo").checked;
-    var comment = document.getElementById("comment").value.trim();
     var hasContact = !!(phone || email);
 
     if (hasContact && !cInternal) {
@@ -206,10 +176,9 @@
       return;
     }
 
-    // 1) Copiar el comentario y abrir Google en el mismo clic (si no, el navegador bloquea la ventana)
-    lastComment = comment;
-    copyText(comment).then(function (copied) { showDone(comment, copied); });
+    // 1) Abrir Google en el mismo clic (si no, el navegador bloquea la ventana)
     openGoogle();
+    showDone();
 
     // 2) Guardar en la hoja interna de Slontec (sin bloquear al cliente)
     sendToSheet({
@@ -217,7 +186,6 @@
       fecha: new Date().toISOString(),
       tecnico: params.get("tecnico") || "",
       servicio: params.get("servicio") || "",
-      comentario: comment,
       telefono: cInternal ? phone : "",
       email: cInternal ? email : "",
       consentimientoGestion: cInternal,
@@ -238,30 +206,13 @@
     }).then(function () { return true; }, function () { return false; });
   }
 
-  function showDone(comment, copied) {
+  function showDone() {
     form.style.display = "none";
-    var pasteStep = document.getElementById("pasteStep");
-    var box = document.getElementById("copiedBox");
-    if (!comment) {
-      pasteStep.innerHTML = "Si quieres, escribe un breve <strong>comentario</strong>.";
-      document.getElementById("copyAgainBtn").style.display = "none";
-    } else if (!copied) {
-      pasteStep.innerHTML = "Copia tu comentario de aquí abajo y <strong>pégalo</strong> en Google.";
-      box.textContent = comment; box.hidden = false;
-    }
     document.getElementById("done").classList.add("show");
     document.getElementById("reviewCard").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   document.getElementById("reopenBtn").addEventListener("click", openGoogle);
-  document.getElementById("copyAgainBtn").addEventListener("click", function () {
-    var btn = this;
-    copyText(lastComment).then(function (ok) {
-      btn.textContent = ok ? "✓ Comentario copiado" : "No se pudo copiar";
-      if (!ok) { var box = document.getElementById("copiedBox"); box.textContent = lastComment; box.hidden = false; }
-      setTimeout(function () { btn.textContent = "Copiar mi comentario de nuevo"; }, 2500);
-    });
-  });
 })();
 </script>
 </body>

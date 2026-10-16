@@ -2,8 +2,8 @@
 
 Página sencilla para que, tras cada servicio, el cliente:
 
-1. Opcionalmente deje su **teléfono o email** (con uno basta) y escriba su **comentario**.
-2. Pulse **«Publicar reseña en Google»**: el comentario se copia solo y se abre directamente la ventana de reseña de la ficha de Google de Slontec. El cliente marca las estrellas y pega el texto.
+1. Opcionalmente deje su **teléfono o email** (con uno basta).
+2. Pulse **«Publicar reseña en Google»**: se abre directamente la ventana de reseña de la ficha de Google de Slontec, donde marca las estrellas y escribe su comentario.
 3. Autorice, con dos casillas separadas (sin marcar por defecto):
    - guardar los datos **solo para gestión interna**, sin cederlos a terceros;
    - recibir **información relevante y promociones puntuales**.
@@ -20,7 +20,7 @@ Página sencilla para que, tras cada servicio, el cliente:
 
 ## Por qué el cliente termina la reseña en Google
 
-Google **no permite** que una web publique reseñas en nombre de un cliente: no existe ninguna API para ello y la reseña (estrellas incluidas) tiene que salir de la cuenta de Google del propio cliente. Por eso la página copia el comentario y abre la ventana de reseña ya apuntando a Slontec (en el móvil, en la app de Google Maps). Al cliente le quedan las estrellas y pegar el texto.
+Google **no permite** que una web publique reseñas en nombre de un cliente: no existe ninguna API para ello y la reseña (estrellas incluidas) tiene que salir de la cuenta de Google del propio cliente. Por eso la página abre la ventana de reseña ya apuntando a Slontec (en el móvil, en la app de Google Maps).
 
 > **Importante (normas de Google):** la página envía a Google **a todos los clientes por igual**. Filtrar y mandar a Google solo las buenas («review gating») está prohibido por Google y puede suponer que borren reseñas o penalicen la ficha. No lo cambiéis.
 
@@ -47,7 +47,7 @@ Sin este paso la página funciona igual para las reseñas, pero **no guarda** lo
 
 La hoja crea sola tres pestañas:
 
-- **Visitas**: cada clic en «Publicar reseña en Google» (fecha, técnico y comentario).
+- **Visitas**: cada clic en «Publicar reseña en Google» (fecha y técnico).
 - **Clientes**: solo quien ha marcado la casilla de autorización, con la fecha y si acepta comunicaciones. Es la prueba del consentimiento: no borrar columnas.
 - **Bajas**: registro de solicitudes. Las bajas se aplican solas en «Clientes» (deja de recibir comunicaciones, o se borra la fila si pide borrar todo).
 

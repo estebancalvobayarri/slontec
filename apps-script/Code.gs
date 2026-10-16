@@ -12,7 +12,7 @@
 var EMAIL_AVISOS = "";
 
 var HOJAS = {
-  "Visitas": ["Fecha", "Técnico", "Servicio", "Comentario", "Dejó sus datos"],
+  "Visitas": ["Fecha", "Técnico", "Servicio", "Dejó sus datos"],
   "Clientes": ["Alta", "Teléfono", "Email", "Consentimiento gestión interna",
                "Consentimiento comunicaciones", "Versión texto consentimiento", "Última actualización", "Baja comunicaciones"],
   "Bajas": ["Fecha", "Teléfono", "Email", "Acción", "Cliente encontrado"]
@@ -56,7 +56,7 @@ function normEmail_(m) { return String(m || "").trim().toLowerCase(); }
 function guardarVisita_(d) {
   var fecha = new Date();
   var conDatos = d.consentimientoGestion === true && !!(d.telefono || d.email);
-  hoja_("Visitas").appendRow([fecha, limpio_(d.tecnico, 100), limpio_(d.servicio, 100), limpio_(d.comentario, 4000), conDatos ? "Sí" : "No"]);
+  hoja_("Visitas").appendRow([fecha, limpio_(d.tecnico, 100), limpio_(d.servicio, 100), conDatos ? "Sí" : "No"]);
 
   if (conDatos) {
     var nuevo = upsertCliente_(d, fecha);
