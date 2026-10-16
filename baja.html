@@ -20,6 +20,10 @@
       <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 41 V84 H76 V41" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span class="logo-text">Slontec<small>Instalación · Mantenimiento · Reparación</small></span>
     </a>
+    <div class="top-actions">
+      <a class="top-call js-tel-link" id="topCall" href="tel:+34961475883" aria-label="Llamar a Slontec"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="js-tel">961 47 58 83</span></a>
+      <a class="top-call top-wa js-wa-link" href="https://wa.me/34600000000" target="_blank" rel="noopener" aria-label="Escribir a Slontec por WhatsApp"><img class="wa-ico" src="whatsapp.png" alt="" width="24" height="24"><span>WhatsApp</span></a>
+    </div>
   </div>
 </header>
 
@@ -73,8 +77,8 @@
       </div>
     </div>
     <div class="foot-contact">
-      <a class="pill" id="footTel" href="tel:+34961475883"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><small>Llámanos</small><span class="js-tel">961 47 58 83</span></span></a>
-      <a class="pill wa" id="footWa" href="https://wa.me/34600000000" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 10h6M9 13.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><small>Escríbenos por WhatsApp</small><span class="js-wa">600 00 00 00</span></span></a>
+      <a class="pill js-tel-link" id="footTel" href="tel:+34961475883"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><small>Llámanos</small><span class="js-tel">961 47 58 83</span></span></a>
+      <a class="pill wa js-wa-link" id="footWa" href="https://wa.me/34600000000" target="_blank" rel="noopener"><img class="wa-ico" src="whatsapp.png" alt="" width="28" height="28"><span><small>Escríbenos por WhatsApp</small><span class="js-wa">600 00 00 00</span></span></a>
     </div>
   </div>
   <div class="wrap foot-legal">
@@ -86,9 +90,9 @@
 (function () {
   var C = window.SLONTEC_CONFIG || {};
   document.querySelectorAll(".js-year").forEach(function (el) { el.textContent = new Date().getFullYear(); });
-  if (C.telefono) document.getElementById("footTel").href = "tel:" + C.telefono.replace(/\s/g, "");
+  if (C.telefono) document.querySelectorAll(".js-tel-link").forEach(function (a) { a.href = "tel:" + C.telefono.replace(/\s/g, ""); });
   if (C.telefonoVisible) document.querySelectorAll(".js-tel").forEach(function (el) { el.textContent = C.telefonoVisible; });
-  if (C.whatsapp) document.getElementById("footWa").href = "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(C.whatsappMensaje || "");
+  if (C.whatsapp) document.querySelectorAll(".js-wa-link").forEach(function (a) { a.href = "https://wa.me/" + C.whatsapp + "?text=" + encodeURIComponent(C.whatsappMensaje || ""); });
   if (C.whatsappVisible) document.querySelectorAll(".js-wa").forEach(function (el) { el.textContent = C.whatsappVisible; });
 })();
 </script>
