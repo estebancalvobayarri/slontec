@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slontec · Valora nuestro servicio</title>
+  <meta name="description" content="SLONTEC Instalación, Mantenimiento y Reparación. Electricidad, fontanería, climatización y reformas en Valencia. Cuéntanos qué tal ha ido tu servicio.">
+  <meta name="theme-color" content="#0f3b5f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2a516'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='800' font-size='38' text-anchor='middle' fill='%233b2a00'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./">
+      <span class="logo-mark">S</span>
+      <span class="logo-text">SLONTEC<small>Instalación · Mantenimiento · Reparación</small></span>
+    </a>
+    <a class="top-call" id="topCall" href="tel:+34961475883">📞 961 47 58 83</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Gracias por confiar en nosotros</h1>
+    <p>Tu opinión nos ayuda a mejorar cada día y a que otros vecinos nos conozcan. Solo te llevará un minuto.</p>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="card main" id="reviewCard">
+
+    <form id="reviewForm" novalidate>
+      <h2>¿Qué tal ha ido el servicio?</h2>
+      <p class="lead">Elige de 1 a 5 estrellas y, si quieres, déjanos un comentario.</p>
+
+      <fieldset>
+        <legend class="sr-only" style="position:absolute;left:-9999px">Puntuación</legend>
+        <div class="stars" id="stars">
+          <input type="radio" id="s5" name="rating" value="5"><label for="s5" title="Excelente">★</label>
+          <input type="radio" id="s4" name="rating" value="4"><label for="s4" title="Muy bien">★</label>
+          <input type="radio" id="s3" name="rating" value="3"><label for="s3" title="Correcto">★</label>
+          <input type="radio" id="s2" name="rating" value="2"><label for="s2" title="Mejorable">★</label>
+          <input type="radio" id="s1" name="rating" value="1"><label for="s1" title="Malo">★</label>
+        </div>
+        <div class="stars-caption" id="starsCaption">Toca una estrella</div>
+      </fieldset>
+
+      <div class="field">
+        <label for="comment">Tu comentario <span class="opt">(opcional)</span></label>
+        <textarea id="comment" maxlength="4000" placeholder="¿Qué te ha parecido el trabajo, la puntualidad, el trato…?"></textarea>
+      </div>
+
+      <div class="block">
+        <h3>¿Quieres que te tengamos en cuenta?</h3>
+        <p class="hint">Opcional. Si nos dejas tus datos, los usaremos para gestionar tus servicios y, solo si lo marcas, para avisarte de novedades o promociones.</p>
+
+        <div class="field">
+          <label for="name">Nombre <span class="opt">(opcional)</span></label>
+          <input type="text" id="name" autocomplete="name">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="phone">Teléfono <span class="opt">(opcional)</span></label>
+            <input type="tel" id="phone" autocomplete="tel" inputmode="tel">
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="opt">(opcional)</span></label>
+            <input type="email" id="email" autocomplete="email" inputmode="email">
+          </div>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="consentInternal">
+          <span>Autorizo a <strong>Slontec Instalaciones y Mantenimientos S.L.</strong> a guardar mis datos de contacto <strong>única y exclusivamente para su gestión interna</strong> (historial de servicios, citas y seguimiento). <strong>No se cederán ni compartirán con terceros.</strong></span>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="consentPromo">
+          <span>Además, acepto recibir de forma puntual <strong>información relevante</strong> (avisos de mantenimiento, revisiones) y <strong>promociones</strong> de Slontec que puedan interesarme.</span>
+        </label>
+
+        <p class="legal-mini">
+          Puedes darte de baja o pedir que borremos tus datos <strong>en cualquier momento</strong> desde
+          <a href="baja.html">esta página</a>, llamando al <span class="js-tel">961 47 58 83</span> o escribiendo a <span class="js-email">info@slontec.com</span>.
+          Más información en la <a href="privacidad.html">política de privacidad</a>.
+        </p>
+      </div>
+
+      <div class="msg err" id="formError" role="alert"></div>
+
+      <button type="submit" class="btn" id="submitBtn">Publicar mi opinión en Google</button>
+      <p class="legal-mini" style="text-align:center">Se abrirá Google con tu comentario ya copiado, para que solo tengas que marcar las estrellas y pegarlo.</p>
+    </form>
+
+    <div class="done" id="done" aria-live="polite">
+      <div class="big">🙌</div>
+      <h2>¡Muchas gracias!</h2>
+      <p class="lead" id="doneLead">Ya casi está. Termina en la ventana de Google que se ha abierto:</p>
+      <ol id="doneSteps">
+        <li>Marca <strong id="doneStars">las mismas estrellas</strong>.</li>
+        <li id="pasteStep">Mantén pulsado el cuadro de texto y elige <strong>Pegar</strong> (tu comentario ya está copiado).</li>
+        <li>Pulsa <strong>Publicar</strong>.</li>
+      </ol>
+      <div class="copied-box" id="copiedBox" hidden></div>
+      <button type="button" class="btn secondary" id="reopenBtn">Abrir Google otra vez</button>
+      <button type="button" class="btn ghost" id="copyAgainBtn">Copiar mi comentario de nuevo</button>
+      <div class="msg ok" id="savedMsg">Tus datos y preferencias se han guardado correctamente.</div>
+    </div>
+  </div>
+
+  <section class="section">
+    <h2>Qué hacemos</h2>
+    <div class="services">
+      <div class="service"><div class="ico">⚡</div><h3>Electricidad</h3><p>Instalaciones, averías, cuadros eléctricos e iluminación.</p></div>
+      <div class="service"><div class="ico">🚿</div><h3>Fontanería</h3><p>Fugas, desatascos, grifería, sanitarios y calentadores.</p></div>
+      <div class="service"><div class="ico">❄️</div><h3>Climatización</h3><p>Instalación y mantenimiento de aire acondicionado y calefacción.</p></div>
+      <div class="service"><div class="ico">🧱</div><h3>Reformas</h3><p>Baños, cocinas, albañilería y acabados.</p></div>
+      <div class="service"><div class="ico">🛠️</div><h3>Mantenimiento</h3><p>Revisiones periódicas para viviendas, comunidades y locales.</p></div>
+      <div class="service"><div class="ico">🏠</div><h3>Reparaciones</h3><p>Reparaciones del hogar y asistencia en siniestros de seguros.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Contacto</h2>
+    <div class="contact">
+      <div><strong>Teléfono</strong><a class="js-tel-link" href="tel:+34961475883">961 47 58 83</a></div>
+      <div><strong>Horario</strong><span class="js-horario">Lunes a viernes, 8:00 – 18:00</span></div>
+      <div><strong>Dirección</strong><span class="js-dir">Pl. Alquería de la Culla, 4, 46910 Alfafar (Valencia)</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    © <span id="year">2026</span> Slontec Instalaciones y Mantenimientos S.L. · CIF B09978149
+    <div class="links">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="baja.html">Darme de baja / borrar mis datos</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var C = window.SLONTEC_CONFIG || {};
+  var REVIEW_URL = "https://search.google.com/local/writereview?placeid=" + encodeURIComponent(C.googlePlaceId || "");
+  var CONSENT_VERSION = "2026-10-v1";
+  var params = new URLSearchParams(location.search);
+
+  // ---- Rellenar datos de contacto desde config ----
+  document.getElementById("year").textContent = new Date().getFullYear();
+  if (C.telefono) {
+    document.querySelectorAll(".js-tel-link, #topCall").forEach(function (a) { a.href = "tel:" + C.telefono.replace(/\s/g, ""); });
+  }
+  if (C.telefonoVisible) {
+    document.querySelectorAll(".js-tel, .js-tel-link").forEach(function (el) { el.textContent = C.telefonoVisible; });
+    document.getElementById("topCall").textContent = "📞 " + C.telefonoVisible;
+  }
+  if (C.email) document.querySelectorAll(".js-email").forEach(function (el) { el.textContent = C.email; });
+  if (C.horario) document.querySelectorAll(".js-horario").forEach(function (el) { el.textContent = C.horario; });
+  if (C.direccionTaller) document.querySelectorAll(".js-dir").forEach(function (el) { el.textContent = C.direccionTaller; });
+
+  // ---- Estrellas ----
+  var captions = { 1: "Malo", 2: "Mejorable", 3: "Correcto", 4: "Muy bien", 5: "¡Excelente!" };
+  var caption = document.getElementById("starsCaption");
+  document.querySelectorAll('input[name="rating"]').forEach(function (r) {
+    r.addEventListener("change", function () {
+      caption.textContent = r.value + " de 5 · " + captions[r.value];
+      hideError();
+    });
+  });
+
+  var form = document.getElementById("reviewForm");
+  var errBox = document.getElementById("formError");
+  function showError(t) { errBox.textContent = t; errBox.classList.add("show"); errBox.scrollIntoView({ behavior: "smooth", block: "center" }); }
+  function hideError() { errBox.classList.remove("show"); }
+
+  // ---- Copiar al portapapeles (con alternativa para navegadores antiguos) ----
+  function copyText(text) {
+    if (!text) return Promise.resolve(false);
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).then(function () { return true; }, function () { return fallbackCopy(text); });
+    }
+    return Promise.resolve(fallbackCopy(text));
+  }
+  function fallbackCopy(text) {
+    try {
+      var ta = document.createElement("textarea");
+      ta.value = text; ta.setAttribute("readonly", "");
+      ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+      var ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) { return false; }
+  }
+
+  function openGoogle() {
+    var w = window.open(REVIEW_URL, "_blank");
+    if (w) { try { w.opener = null; } catch (e) {} }
+    else location.href = REVIEW_URL; // si el navegador bloquea la ventana nueva
+  }
+
+  var lastComment = "";
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    hideError();
+
+    var checked = form.querySelector('input[name="rating"]:checked');
+    if (!checked) { showError("Por favor, elige una puntuación de 1 a 5 estrellas."); return; }
+    var rating = Number(checked.value);
+    var comment = document.getElementById("comment").value.trim();
+    var name = document.getElementById("name").value.trim();
+    var phone = document.getElementById("phone").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var cInternal = document.getElementById("consentInternal").checked;
+    var cPromo = document.getElementById("consentPromo").checked;
+    var hasContact = !!(name || phone || email);
+
+    if (hasContact && !cInternal) {
+      showError("Para guardar tus datos necesitamos que marques la casilla de autorización. Si prefieres no dejarlos, borra los campos de nombre, teléfono y email.");
+      return;
+    }
+    if (cPromo && !cInternal) {
+      showError("Para enviarte información o promociones necesitamos también tu autorización para guardar los datos (primera casilla).");
+      return;
+    }
+    if ((cInternal || cPromo) && !phone && !email) {
+      showError("Indica al menos un teléfono o un email para poder guardarte como cliente.");
+      return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError("Revisa el email, parece que no está bien escrito.");
+      return;
+    }
+
+    lastComment = comment;
+
+    // 1) Copiar y abrir Google en el mismo clic (si no, el navegador bloquea la ventana)
+    copyText(comment).then(function (copied) { showDone(rating, comment, copied); });
+    openGoogle();
+
+    // 2) Guardar en la hoja interna de Slontec (sin bloquear al cliente)
+    var payload = {
+      tipo: "resena",
+      fecha: new Date().toISOString(),
+      estrellas: rating,
+      comentario: comment,
+      tecnico: params.get("tecnico") || "",
+      servicio: params.get("servicio") || "",
+      nombre: cInternal ? name : "",
+      telefono: cInternal ? phone : "",
+      email: cInternal ? email : "",
+      consentimientoGestion: cInternal,
+      consentimientoComercial: cPromo,
+      versionTextoConsentimiento: CONSENT_VERSION,
+      navegador: navigator.userAgent
+    };
+    sendToSheet(payload).then(function (ok) {
+      if (ok && cInternal) document.getElementById("savedMsg").classList.add("show");
+    });
+  });
+
+  function sendToSheet(payload) {
+    if (!C.appsScriptUrl) return Promise.resolve(false);
+    return fetch(C.appsScriptUrl, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).then(function () { return true; }, function () { return false; });
+  }
+
+  function showDone(rating, comment, copied) {
+    form.style.display = "none";
+    var done = document.getElementById("done");
+    done.classList.add("show");
+    document.getElementById("doneStars").textContent = rating + (rating === 1 ? " estrella" : " estrellas");
+    var pasteStep = document.getElementById("pasteStep");
+    var box = document.getElementById("copiedBox");
+    var copyBtn = document.getElementById("copyAgainBtn");
+    if (!comment) {
+      pasteStep.innerHTML = "Si quieres, escribe un breve comentario.";
+      copyBtn.style.display = "none";
+    } else if (!copied) {
+      pasteStep.innerHTML = "Copia tu comentario de aquí abajo y pégalo en Google.";
+      box.textContent = comment; box.hidden = false;
+    }
+    document.getElementById("reviewCard").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  document.getElementById("reopenBtn").addEventListener("click", openGoogle);
+  document.getElementById("copyAgainBtn").addEventListener("click", function () {
+    var btn = this;
+    copyText(lastComment).then(function (ok) {
+      btn.textContent = ok ? "✓ Comentario copiado" : "No se pudo copiar";
+      if (!ok) { var box = document.getElementById("copiedBox"); box.textContent = lastComment; box.hidden = false; }
+      setTimeout(function () { btn.textContent = "Copiar mi comentario de nuevo"; }, 2500);
+    });
+  });
+})();
+</script>
+</body>
+</html>

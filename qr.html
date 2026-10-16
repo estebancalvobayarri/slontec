@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slontec · Tarjeta QR para técnicos</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    .tools { padding: 20px 0; }
+    .tools .row { align-items: end; }
+    .sheet { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding-bottom: 30px; }
+    @media (max-width: 600px) { .sheet { grid-template-columns: 1fr; } }
+    .tarjeta {
+      background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; text-align: center;
+      break-inside: avoid;
+    }
+    .tarjeta .marca { font-weight: 800; letter-spacing: .08em; color: var(--brand); }
+    .tarjeta h3 { margin: 4px 0 2px; font-size: 18px; }
+    .tarjeta p { margin: 0 0 10px; font-size: 13px; color: var(--ink-soft); }
+    .tarjeta .qr { display: inline-block; padding: 8px; background: #fff; }
+    .tarjeta .stars-txt { color: var(--accent); font-size: 22px; letter-spacing: 4px; }
+    .tarjeta .tel { font-size: 13px; margin-top: 6px; }
+    @media print {
+      header, .tools, footer { display: none !important; }
+      body { background: #fff; }
+      .sheet { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./">
+      <span class="logo-mark">S</span>
+      <span class="logo-text">SLONTEC<small>Tarjeta QR para los técnicos</small></span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="tools">
+    <p>Imprime estas tarjetas para dejarlas al terminar cada servicio, o enseña el QR desde el móvil. Si pones el nombre del técnico, sabrás internamente quién hizo cada servicio valorado.</p>
+    <div class="row">
+      <div class="field">
+        <label for="tec">Técnico <span class="opt">(opcional)</span></label>
+        <input type="text" id="tec" placeholder="Ej.: Michael">
+      </div>
+      <div class="field">
+        <button type="button" class="btn secondary" id="print" style="margin-top:0">Imprimir tarjetas</button>
+      </div>
+    </div>
+    <p class="legal-mini">Enlace: <a id="link" href="./"></a></p>
+  </div>
+  <div class="sheet" id="sheet"></div>
+</main>
+
+<footer><div class="wrap">Slontec</div></footer>
+
+<script>
+  var base = new URL("./", location.href).href;
+  var sheet = document.getElementById("sheet");
+  function render() {
+    var tec = document.getElementById("tec").value.trim();
+    var url = base + (tec ? "?tecnico=" + encodeURIComponent(tec) : "");
+    var a = document.getElementById("link"); a.href = url; a.textContent = url;
+    sheet.innerHTML = "";
+    for (var i = 0; i < 4; i++) {
+      var t = document.createElement("div");
+      t.className = "tarjeta";
+      t.innerHTML = '<div class="marca">SLONTEC</div><h3>¿Qué tal ha ido?</h3>' +
+        '<p>Escanea y valóranos en Google. ¡Gracias!</p><div class="qr"></div>' +
+        '<div class="stars-txt">★★★★★</div><div class="tel">961 47 58 83</div>';
+      sheet.appendChild(t);
+      new QRCode(t.querySelector(".qr"), { text: url, width: 150, height: 150, correctLevel: QRCode.CorrectLevel.M });
+    }
+  }
+  document.getElementById("tec").addEventListener("input", render);
+  document.getElementById("print").addEventListener("click", function () { window.print(); });
+  render();
+</script>
+</body>
+</html>

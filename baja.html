@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slontec · Darse de baja</title>
+  <meta name="theme-color" content="#0f3b5f">
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./">
+      <span class="logo-mark">S</span>
+      <span class="logo-text">SLONTEC<small>Instalación · Mantenimiento · Reparación</small></span>
+    </a>
+  </div>
+</header>
+
+<main class="wrap legal">
+  <div class="card">
+    <form id="bajaForm" novalidate>
+      <h2>Darse de baja</h2>
+      <p class="lead">Indica el teléfono o email con el que te registraste y qué quieres hacer. Lo atenderemos lo antes posible.</p>
+
+      <div class="row">
+        <div class="field">
+          <label for="phone">Teléfono</label>
+          <input type="tel" id="phone" autocomplete="tel" inputmode="tel">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="email" inputmode="email">
+        </div>
+      </div>
+
+      <label class="check">
+        <input type="radio" name="accion" value="baja_comercial" checked>
+        <span><strong>No quiero recibir más información ni promociones.</strong> Conservad mis datos solo para la gestión de mis servicios.</span>
+      </label>
+      <label class="check">
+        <input type="radio" name="accion" value="borrar_todo">
+        <span><strong>Borrad todos mis datos de contacto.</strong></span>
+      </label>
+
+      <div class="msg err" id="err" role="alert"></div>
+      <button type="submit" class="btn secondary" id="btn">Enviar solicitud</button>
+      <p class="legal-mini">También puedes pedirlo llamando al <span class="js-tel">961 47 58 83</span> o escribiendo a <span class="js-email">info@slontec.com</span>.</p>
+    </form>
+
+    <div class="done" id="done">
+      <div class="big">✔️</div>
+      <h2>Solicitud recibida</h2>
+      <p class="lead">Hemos registrado tu petición. Dejarás de recibir comunicaciones de inmediato.</p>
+      <a class="btn ghost" href="./">Volver al inicio</a>
+    </div>
+  </div>
+</main>
+
+<footer><div class="wrap">© Slontec Instalaciones y Mantenimientos S.L. · <a href="privacidad.html">Política de privacidad</a></div></footer>
+
+<script>
+(function () {
+  var C = window.SLONTEC_CONFIG || {};
+  if (C.email) document.querySelectorAll(".js-email").forEach(function (el) { el.textContent = C.email; });
+  if (C.telefonoVisible) document.querySelectorAll(".js-tel").forEach(function (el) { el.textContent = C.telefonoVisible; });
+
+  var p = new URLSearchParams(location.search);
+  if (p.get("email")) document.getElementById("email").value = p.get("email");
+  if (p.get("tel")) document.getElementById("phone").value = p.get("tel");
+
+  var form = document.getElementById("bajaForm");
+  var err = document.getElementById("err");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    err.classList.remove("show");
+    var phone = document.getElementById("phone").value.trim();
+    var email = document.getElementById("email").value.trim();
+    var accion = form.querySelector('input[name="accion"]:checked').value;
+    if (!phone && !email) {
+      err.textContent = "Indica tu teléfono o tu email para poder localizarte.";
+      err.classList.add("show");
+      return;
+    }
+
+    var payload = { tipo: "baja", fecha: new Date().toISOString(), telefono: phone, email: email, accion: accion };
+
+    if (!C.appsScriptUrl) {
+      // Sin hoja configurada: se abre un email de baja ya redactado
+      var body = "Solicito: " + (accion === "borrar_todo" ? "borrar todos mis datos" : "no recibir más comunicaciones") +
+        "\nTeléfono: " + phone + "\nEmail: " + email;
+      location.href = "mailto:" + (C.email || "") + "?subject=" + encodeURIComponent("BAJA") + "&body=" + encodeURIComponent(body);
+      return;
+    }
+
+    document.getElementById("btn").disabled = true;
+    fetch(C.appsScriptUrl, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    }).finally(function () {
+      form.style.display = "none";
+      document.getElementById("done").classList.add("show");
+    });
+  });
+})();
+</script>
+</body>
+</html>
