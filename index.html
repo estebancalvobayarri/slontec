@@ -39,42 +39,28 @@
 
     <form id="reviewForm" novalidate>
       <h2>¿Qué tal ha ido el servicio?</h2>
-      <p class="lead">Elige de 1 a 5 estrellas y, si quieres, déjanos un comentario.</p>
-
-      <fieldset>
-        <legend class="sr-only" style="position:absolute;left:-9999px">Puntuación</legend>
-        <div class="stars" id="stars">
-          <input type="radio" id="s5" name="rating" value="5"><label for="s5" title="Excelente">★</label>
-          <input type="radio" id="s4" name="rating" value="4"><label for="s4" title="Muy bien">★</label>
-          <input type="radio" id="s3" name="rating" value="3"><label for="s3" title="Correcto">★</label>
-          <input type="radio" id="s2" name="rating" value="2"><label for="s2" title="Mejorable">★</label>
-          <input type="radio" id="s1" name="rating" value="1"><label for="s1" title="Malo">★</label>
-        </div>
-        <div class="stars-caption" id="starsCaption">Toca una estrella</div>
-      </fieldset>
-
-      <div class="field">
-        <label for="comment">Tu comentario <span class="opt">(opcional)</span></label>
-        <textarea id="comment" maxlength="4000" placeholder="¿Qué te ha parecido el trabajo, la puntualidad, el trato…?"></textarea>
-      </div>
+      <p class="lead">Cuéntalo en Google: tu reseña nos ayuda a mejorar y a que otros vecinos nos conozcan.</p>
 
       <div class="block">
         <h3>¿Quieres que te tengamos en cuenta?</h3>
         <p class="hint">Opcional. Si nos dejas tus datos, los usaremos para gestionar tus servicios y, solo si lo marcas, para avisarte de novedades o promociones.</p>
 
-        <div class="field">
-          <label for="name">Nombre <span class="opt">(opcional)</span></label>
-          <input type="text" id="name" autocomplete="name">
-        </div>
+        <p class="one-of"><span>Nos basta con <strong>uno de los dos</strong>: teléfono <strong>o</strong> email.</span></p>
         <div class="row">
           <div class="field">
-            <label for="phone">Teléfono <span class="opt">(opcional)</span></label>
-            <input type="tel" id="phone" autocomplete="tel" inputmode="tel">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="600 123 456">
           </div>
           <div class="field">
-            <label for="email">Email <span class="opt">(opcional)</span></label>
-            <input type="email" id="email" autocomplete="email" inputmode="email">
+            <label for="email">Email</label>
+            <input type="email" id="email" autocomplete="email" inputmode="email" placeholder="tu@email.com">
           </div>
+        </div>
+
+        <div class="field">
+          <label for="comment">Tu comentario para Google <span class="opt">(opcional)</span></label>
+          <textarea id="comment" maxlength="4000" placeholder="¿Qué te ha parecido el trabajo, la puntualidad, el trato…?"></textarea>
+          <p class="legal-mini">Lo copiaremos por ti: en Google solo tendrás que pegarlo.</p>
         </div>
 
         <label class="check">
@@ -96,16 +82,16 @@
 
       <div class="msg err" id="formError" role="alert"></div>
 
-      <button type="submit" class="btn" id="submitBtn">Publicar mi opinión en Google</button>
-      <p class="legal-mini" style="text-align:center">Se abrirá Google con tu comentario ya copiado, para que solo tengas que marcar las estrellas y pegarlo.</p>
+      <button type="submit" class="btn" id="submitBtn">Publicar reseña en Google</button>
+      <p class="legal-mini" style="text-align:center">Se abrirá la ficha de Slontec en Google para que marques tus estrellas y pegues tu comentario.</p>
     </form>
 
     <div class="done" id="done" aria-live="polite">
       <svg class="done-mark" viewBox="0 0 100 100" aria-hidden="true"><path d="M14 48 L50 17 L86 48 M24 41 V84 H76 V41" fill="none" stroke="#0f3b5f" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path class="done-check" d="M35 62 L46 73 L66 51" fill="none" stroke="#f2a516" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <h2>¡Muchas gracias!</h2>
-      <p class="lead" id="doneLead">Ya casi está. Termina en la ventana de Google que se ha abierto:</p>
-      <ol id="doneSteps">
-        <li>Marca <strong id="doneStars">las mismas estrellas</strong>.</li>
+      <p class="lead">Ya casi está. Termina en la ventana de Google que se ha abierto:</p>
+      <ol>
+        <li>Marca las <strong>estrellas</strong>.</li>
         <li id="pasteStep">Mantén pulsado el cuadro de texto y elige <strong>Pegar</strong> (tu comentario ya está copiado).</li>
         <li>Pulsa <strong>Publicar</strong>.</li>
       </ol>
@@ -152,27 +138,18 @@
 (function () {
   var C = window.SLONTEC_CONFIG || {};
   var REVIEW_URL = "https://search.google.com/local/writereview?placeid=" + encodeURIComponent(C.googlePlaceId || "");
-  var CONSENT_VERSION = "2026-10-v1";
+  var CONSENT_VERSION = "2026-10-v2";
   var params = new URLSearchParams(location.search);
 
   // ---- Datos de contacto desde config ----
   if (C.telefono) document.getElementById("topCall").href = "tel:" + C.telefono.replace(/\s/g, "");
   if (C.email) document.querySelectorAll(".js-email").forEach(function (el) { el.textContent = C.email; });
 
-  // ---- Estrellas ----
-  var captions = { 1: "Malo", 2: "Mejorable", 3: "Correcto", 4: "Muy bien", 5: "¡Excelente!" };
-  var caption = document.getElementById("starsCaption");
-  document.querySelectorAll('input[name="rating"]').forEach(function (r) {
-    r.addEventListener("change", function () {
-      caption.textContent = r.value + " de 5 · " + captions[r.value];
-      hideError();
-    });
-  });
-
   var form = document.getElementById("reviewForm");
   var errBox = document.getElementById("formError");
   function showError(t) { errBox.textContent = t; errBox.classList.add("show"); errBox.scrollIntoView({ behavior: "smooth", block: "center" }); }
   function hideError() { errBox.classList.remove("show"); }
+  form.addEventListener("input", hideError);
 
   // ---- Copiar al portapapeles (con alternativa para navegadores antiguos) ----
   function copyText(text) {
@@ -193,6 +170,7 @@
       return ok;
     } catch (e) { return false; }
   }
+  var lastComment = "";
 
   function openGoogle() {
     var w = window.open(REVIEW_URL, "_blank");
@@ -200,33 +178,27 @@
     else location.href = REVIEW_URL; // si el navegador bloquea la ventana nueva
   }
 
-  var lastComment = "";
-
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     hideError();
 
-    var checked = form.querySelector('input[name="rating"]:checked');
-    if (!checked) { showError("Por favor, elige una puntuación de 1 a 5 estrellas."); return; }
-    var rating = Number(checked.value);
-    var comment = document.getElementById("comment").value.trim();
-    var name = document.getElementById("name").value.trim();
     var phone = document.getElementById("phone").value.trim();
     var email = document.getElementById("email").value.trim();
     var cInternal = document.getElementById("consentInternal").checked;
     var cPromo = document.getElementById("consentPromo").checked;
-    var hasContact = !!(name || phone || email);
+    var comment = document.getElementById("comment").value.trim();
+    var hasContact = !!(phone || email);
 
     if (hasContact && !cInternal) {
-      showError("Para guardar tus datos necesitamos que marques la casilla de autorización. Si prefieres no dejarlos, borra los campos de nombre, teléfono y email.");
+      showError("Para guardar tus datos necesitamos que marques la casilla de autorización. Si prefieres no dejarlos, borra el teléfono y el email.");
       return;
     }
     if (cPromo && !cInternal) {
       showError("Para enviarte información o promociones necesitamos también tu autorización para guardar los datos (primera casilla).");
       return;
     }
-    if ((cInternal || cPromo) && !phone && !email) {
-      showError("Indica al menos un teléfono o un email para poder guardarte como cliente.");
+    if (cInternal && !hasContact) {
+      showError("Indica un teléfono o un email para poder guardarte como cliente.");
       return;
     }
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -234,29 +206,24 @@
       return;
     }
 
+    // 1) Copiar el comentario y abrir Google en el mismo clic (si no, el navegador bloquea la ventana)
     lastComment = comment;
-
-    // 1) Copiar y abrir Google en el mismo clic (si no, el navegador bloquea la ventana)
-    copyText(comment).then(function (copied) { showDone(rating, comment, copied); });
+    copyText(comment).then(function (copied) { showDone(comment, copied); });
     openGoogle();
 
     // 2) Guardar en la hoja interna de Slontec (sin bloquear al cliente)
-    var payload = {
-      tipo: "resena",
+    sendToSheet({
+      tipo: "visita",
       fecha: new Date().toISOString(),
-      estrellas: rating,
-      comentario: comment,
       tecnico: params.get("tecnico") || "",
       servicio: params.get("servicio") || "",
-      nombre: cInternal ? name : "",
+      comentario: comment,
       telefono: cInternal ? phone : "",
       email: cInternal ? email : "",
       consentimientoGestion: cInternal,
       consentimientoComercial: cPromo,
-      versionTextoConsentimiento: CONSENT_VERSION,
-      navegador: navigator.userAgent
-    };
-    sendToSheet(payload).then(function (ok) {
+      versionTextoConsentimiento: CONSENT_VERSION
+    }).then(function (ok) {
       if (ok && cInternal) document.getElementById("savedMsg").classList.add("show");
     });
   });
@@ -271,21 +238,18 @@
     }).then(function () { return true; }, function () { return false; });
   }
 
-  function showDone(rating, comment, copied) {
+  function showDone(comment, copied) {
     form.style.display = "none";
-    var done = document.getElementById("done");
-    done.classList.add("show");
-    document.getElementById("doneStars").textContent = rating + (rating === 1 ? " estrella" : " estrellas");
     var pasteStep = document.getElementById("pasteStep");
     var box = document.getElementById("copiedBox");
-    var copyBtn = document.getElementById("copyAgainBtn");
     if (!comment) {
-      pasteStep.innerHTML = "Si quieres, escribe un breve comentario.";
-      copyBtn.style.display = "none";
+      pasteStep.innerHTML = "Si quieres, escribe un breve <strong>comentario</strong>.";
+      document.getElementById("copyAgainBtn").style.display = "none";
     } else if (!copied) {
-      pasteStep.innerHTML = "Copia tu comentario de aquí abajo y pégalo en Google.";
+      pasteStep.innerHTML = "Copia tu comentario de aquí abajo y <strong>pégalo</strong> en Google.";
       box.textContent = comment; box.hidden = false;
     }
+    document.getElementById("done").classList.add("show");
     document.getElementById("reviewCard").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
