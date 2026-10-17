@@ -133,6 +133,7 @@ fieldset { border: 0; padding: 0; margin: 0; }
 }
 .block h3 { margin: 0 0 4px; font-size: 18px; color: var(--brand); }
 .block .hint { margin: 0 0 14px; color: var(--ink-soft); font-size: 14px; }
+.form-body { margin-top: 18px; }
 .one-of {
   display: flex; align-items: center; gap: 10px;
   margin: 0 0 12px; padding: 10px 14px; border-radius: 10px;
